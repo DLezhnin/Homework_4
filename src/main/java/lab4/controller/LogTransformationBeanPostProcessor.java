@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
+//@Component
 public class LogTransformationBeanPostProcessor implements BeanPostProcessor {
     @Autowired
     ValidateLog log;
