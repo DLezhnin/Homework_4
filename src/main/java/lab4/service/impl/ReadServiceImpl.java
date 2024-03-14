@@ -37,22 +37,18 @@ public class ReadServiceImpl implements Function<String, List<Model>> {
         File folder = new File(path);
         for (File file : folder.listFiles()){
             if (file.isFile()) {
-                try {
-                    FileReader fr = new FileReader(file);
-                    BufferedReader br = new BufferedReader(fr);
+                try (BufferedReader br = new BufferedReader(new FileReader(file));){
                     String line = br.readLine();
                     while (line != null) {
                         models.add(parse(line));
                         line = br.readLine();
                     }
-                    br.close();
-                    fr.close();
                 } catch (FileNotFoundException e) {
-                    continue;
+                    throw new RuntimeException();
                 } catch (IOException e) {
-                    continue;
+                    throw new RuntimeException();
                 } catch (ParseException e) {
-                    continue;
+                    throw new RuntimeException();
                 }
             }
         }
